@@ -11,7 +11,6 @@ import Vapor
 struct PluginController: RouteCollection {
     func boot(routes: RoutesBuilder) throws {
         let plugins = routes.grouped("plugins")
-        plugins.get(use: index)
 
         let user = plugins.grouped(UserToken.authenticator(), UserToken.guardMiddleware())
         user.post(use: create)
@@ -23,6 +22,8 @@ struct PluginController: RouteCollection {
         let maintainer = plugins.grouped(MaintainerToken.authenticator(), MaintainerToken.guardMiddleware())
         maintainer.post(":pluginID/ban", use: ban)
         maintainer.get("banned", use: indexBanned)
+        
+        plugins.get(use: index)
     }
 
     // MARK: - Anyone
