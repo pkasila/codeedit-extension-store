@@ -1,6 +1,6 @@
 import Fluent
 import FluentPostgresDriver
-import Leaf
+import JWT
 import Vapor
 
 // configures your application
@@ -16,11 +16,16 @@ public func configure(_ app: Application) throws {
         database: Environment.get("DATABASE_NAME") ?? "vapor_database"
     ), as: .psql)
 
-    app.migrations.add(CreateTodo())
+    app.migrations.add(CreatePlugin())
+    app.migrations.add(CreatePluginRelease())
+    app.migrations.add(CreatePluginHookInfo())
 
-    app.views.use(.leaf)
-
-    
+    try app.client.get(URI(string: Environment.get("KEYCLOAK_JWKS_URL") ?? "https://keycloak.pkasila.net/auth/realms/CodeEdit/protocol/openid-connect/certs"))
+        .flatMapThrowing { (response: ClientResponse) in
+            let jwks = try JSONDecoder().decode(JWKS.self, from: response.body!)
+            try app.jwt.signers.use(jwks: jwks)
+        }
+        .wait()
 
     // register routes
     try routes(app)
