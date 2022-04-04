@@ -15,8 +15,8 @@ struct PluginController: RouteCollection {
         let user = plugins.grouped(UserToken.authenticator(), UserToken.guardMiddleware())
         user.post(use: create)
         user.group(":pluginID") { plugin in
-            user.get(use: get)
-            user.delete(use: delete)
+            plugin.get(use: get)
+            plugin.delete(use: delete)
         }
 
         let maintainer = plugins.grouped(MaintainerToken.authenticator(), MaintainerToken.guardMiddleware())
