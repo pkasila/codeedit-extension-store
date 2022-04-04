@@ -13,9 +13,6 @@ struct CreatePluginHookInfo: AsyncMigration {
             .id()
             .field("plugin_id", .uuid, .required, .references("plugins", "id"))
             .field("secret_data", .data, .required)
-            .field("created_at", .datetime)
-            .field("updated_at", .datetime)
-            .field("deleted_at", .datetime)
             .create()
     }
 

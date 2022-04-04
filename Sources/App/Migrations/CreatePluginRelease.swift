@@ -15,9 +15,6 @@ struct CreatePluginRelease: AsyncMigration {
             .field("external_id", .string, .required)
             .field("version", .string, .required)
             .field("tarball", .string)
-            .field("created_at", .datetime)
-            .field("updated_at", .datetime)
-            .field("deleted_at", .datetime)
             .create()
     }
 

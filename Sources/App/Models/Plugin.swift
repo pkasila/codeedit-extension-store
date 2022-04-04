@@ -33,15 +33,6 @@ final class Plugin: Model, Content {
     @Field(key: "author")
     var author: UUID
 
-    @Timestamp(key: "created_at", on: .create)
-    var createdAt: Date?
-
-    @Timestamp(key: "updated_at", on: .update)
-    var updatedAt: Date?
-
-    @Timestamp(key: "deleted_at", on: .delete)
-    var deletedAt: Date?
-
     @Field(key: "ban")
     var ban: Ban?
 

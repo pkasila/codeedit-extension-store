@@ -26,9 +26,6 @@ struct CreatePlugin: AsyncMigration {
             .field("release_management", managementType, .required)
             .field("sdk", sdkType, .required)
             .field("author", .uuid)
-            .field("created_at", .datetime)
-            .field("updated_at", .datetime)
-            .field("deleted_at", .datetime)
             .field("ban", .dictionary)
             .create()
     }

@@ -89,7 +89,8 @@ struct PluginController: RouteCollection {
         guard let plugin = try await Plugin.find(req.parameters.get("pluginID"), on: req.db) else {
             throw Abort(.notFound)
         }
-        try await plugin.delete(on: req.db)
+        // TODO: soft delete required
+        // try await plugin.delete(on: req.db)
         plugin.ban = .init(bannedBy: maintainer.sub, reason: banReason)
         try await plugin.save(on: req.db)
 
