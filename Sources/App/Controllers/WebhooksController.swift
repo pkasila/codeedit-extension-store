@@ -18,7 +18,7 @@ struct WebhooksController: RouteCollection {
     }
 
     func hookGitHub(req: Request) async throws -> HTTPStatus {
-        guard let hmac = req.headers.first(name: .init("HTTP_X_HUB_SIGNATURE_256"))?
+        guard let hmac = req.headers.first(name: .init("X-Hub-Signature-256"))?
                 .replacingOccurrences(of: "sha256=", with: "")
                 .replacingOccurrences(of: " ", with: "") else {
             throw Abort(.unauthorized)
