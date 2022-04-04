@@ -53,6 +53,7 @@ final class Plugin: Model, Content {
         self.management = releaseManagement
         self.sdk = sdk
         self.author = author
+        self.ban = nil
     }
 
     func applyCreate(_ src: Create) {
