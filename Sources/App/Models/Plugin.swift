@@ -61,6 +61,10 @@ final class Plugin: Model, Content {
         self.management = src.management
         self.sdk = src.sdk
     }
+
+    private enum CodingKeys: String, CodingKey {
+        case id, manifest, management, sdk, releases, author, createdAt, updatedAt, deletedAt, ban
+    }
 }
 
 extension Plugin {
