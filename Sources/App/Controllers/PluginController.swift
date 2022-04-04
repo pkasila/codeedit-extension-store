@@ -22,7 +22,7 @@ struct PluginController: RouteCollection {
         let maintainer = plugins.grouped(MaintainerToken.authenticator(), MaintainerToken.guardMiddleware())
         maintainer.post(":pluginID/ban", use: ban)
         maintainer.get("banned", use: indexBanned)
-        
+
         plugins.get(use: index)
     }
 

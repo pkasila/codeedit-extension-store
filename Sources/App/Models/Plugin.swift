@@ -52,6 +52,7 @@ final class Plugin: Model, Content {
         self.manifest = manifest
         self.management = releaseManagement
         self.sdk = sdk
+        self.author = author
     }
 
     func applyCreate(_ src: Create) {
