@@ -63,7 +63,7 @@ final class Plugin: Model, Content {
     }
 
     private enum CodingKeys: String, CodingKey {
-        case id, manifest, management, sdk, releases, author, createdAt, updatedAt, deletedAt, ban
+        case id, manifest, management, sdk, releases, author, ban
     }
 }
 
