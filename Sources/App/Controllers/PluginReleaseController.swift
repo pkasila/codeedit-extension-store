@@ -13,13 +13,7 @@ struct PluginReleaseController: RouteCollection {
         let plugins = routes.grouped("plugins")
 
         // anyone
-        plugins.get(":pluginID/releases", use: index)
         routes.get("releases/:releaseID", use: get)
-    }
-
-    func index(req: Request) async throws -> Page<PluginRelease> {
-        try await PluginRelease.query(on: req.db)
-            .filter("plugin_id", .equal, req.parameters.get("releaseID")).paginate(for: req)
     }
 
     func get(req: Request) async throws -> PluginRelease {

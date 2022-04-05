@@ -26,7 +26,10 @@ struct PluginController: RouteCollection {
 
         // anyone
         plugins.get(use: index)
-        plugins.get(":pluginID", use: get)
+        plugins.group(":pluginID") { plugin in
+            plugin.get(use: get)
+            plugin.get("releases", use: indexReleases)
+        }
     }
 
     // MARK: - Anyone
@@ -41,6 +44,11 @@ struct PluginController: RouteCollection {
         }
 
         return plugin
+    }
+
+    func indexReleases(req: Request) async throws -> Page<PluginRelease> {
+        try await PluginRelease.query(on: req.db)
+            .filter("plugin_id", .equal, req.parameters.get("releaseID")).paginate(for: req)
     }
 
     // MARK: - Authorized user
