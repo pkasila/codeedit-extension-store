@@ -10,17 +10,19 @@ import Vapor
 
 struct PluginReleaseController: RouteCollection {
     func boot(routes: RoutesBuilder) throws {
-        let plugins = routes.grouped("plugins")
+        let releases = routes.grouped("releases")
 
         // anyone
-        routes.get("releases/:releaseID", use: get)
+        releases.group(":releaseID") { release in
+            release.get(use: get)
+        }
     }
 
     func get(req: Request) async throws -> PluginRelease {
-        guard let plugin = try await PluginRelease.find(req.parameters.get("releaseID"), on: req.db) else {
+        guard let release = try await PluginRelease.find(req.parameters.get("releaseID"), on: req.db) else {
             throw Abort(.notFound)
         }
 
-        return plugin
+        return release
     }
 }
