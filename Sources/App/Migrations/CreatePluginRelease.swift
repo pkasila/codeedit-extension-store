@@ -14,7 +14,7 @@ struct CreatePluginRelease: AsyncMigration {
             .field("plugin_id", .uuid, .required, .references("plugins", "id"))
             .field("external_id", .string, .required)
             .field("version", .string, .required)
-            .field("tarball", .json)
+            .field("tarball", .string)
             .create()
     }
 

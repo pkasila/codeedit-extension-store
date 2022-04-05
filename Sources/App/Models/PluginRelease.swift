@@ -24,7 +24,7 @@ final class PluginRelease: Model, Content {
     var version: String
 
     @Field(key: "tarball")
-    var tarball: URL?
+    var tarball: String?
 
     init() { }
 

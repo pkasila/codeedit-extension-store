@@ -48,7 +48,7 @@ struct PluginController: RouteCollection {
 
     func indexReleases(req: Request) async throws -> Page<PluginRelease> {
         try await PluginRelease.query(on: req.db)
-            .filter("plugin_id", .equal, req.parameters.get("releaseID")).paginate(for: req)
+            .filter("plugin_id", .equal, req.parameters.get("pluginID", as: UUID.self)).paginate(for: req)
     }
 
     // MARK: - Authorized user

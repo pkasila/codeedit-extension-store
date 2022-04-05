@@ -71,7 +71,7 @@ struct WebhooksController: RouteCollection {
 
         release.externalID = event.release.tagName
         release.version = event.release.tagName
-        release.tarball = event.release.assets.first(where: {$0.name == "extension.tar"})?.url
+        release.tarball = event.release.assets.first(where: {$0.name == "extension.tar"})?.url.absoluteString
 
         try await release.save(on: req.db)
 
