@@ -63,7 +63,7 @@ struct WebhooksController: RouteCollection {
                 .filter(\.$externalID, .equal, event.release.tagName).first()
             try await release?.delete(on: req.db)
 
-            return .ok
+            throw Abort(.ok)
         }
 
         let release = try await plugin.$releases.query(on: req.db)
