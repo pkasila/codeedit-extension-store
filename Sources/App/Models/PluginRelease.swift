@@ -23,7 +23,7 @@ final class PluginRelease: Model, Content {
     @Field(key: "version")
     var version: String
 
-    @Field(key: "tarball_url")
+    @Field(key: "tarball")
     var tarball: URL?
 
     init() { }
