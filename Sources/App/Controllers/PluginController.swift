@@ -12,18 +12,21 @@ struct PluginController: RouteCollection {
     func boot(routes: RoutesBuilder) throws {
         let plugins = routes.grouped("plugins")
 
+        // user
         let user = plugins.grouped(UserToken.authenticator(), UserToken.guardMiddleware())
         user.post(use: create)
         user.group(":pluginID") { plugin in
-            plugin.get(use: get)
             plugin.delete(use: delete)
         }
 
+        // maintainer
         let maintainer = plugins.grouped(MaintainerToken.authenticator(), MaintainerToken.guardMiddleware())
         maintainer.post(":pluginID/ban", use: ban)
         maintainer.get("banned", use: indexBanned)
 
+        // anyone
         plugins.get(use: index)
+        plugins.get(":pluginID", use: get)
     }
 
     // MARK: - Anyone
