@@ -71,7 +71,7 @@ struct WebhooksController: RouteCollection {
 
         release.externalID = event.release.tagName
         release.version = event.release.tagName
-        release.tarball = event.release.assets.first(where: {$0.name == "extension.tar"})?.url.absoluteString
+        release.tarball = event.release.assets.first(where: {$0.name == "extension.tar"})?.browserDownloadURL.absoluteString
 
         try await release.save(on: req.db)
 
@@ -109,5 +109,13 @@ fileprivate struct GitHubReleaseHook: Codable {
         var id: Int
         var name: String
         var url: URL
+        var browserDownloadURL: URL
+
+        enum CodingKeys: String, CodingKey {
+            case id
+            case name
+            case url
+            case browserDownloadURL = "browser_download_url"
+        }
     }
 }
