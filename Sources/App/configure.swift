@@ -19,6 +19,7 @@ public func configure(_ app: Application) throws {
     app.migrations.add(CreatePlugin())
     app.migrations.add(CreatePluginRelease())
     app.migrations.add(CreatePluginHookInfo())
+    app.migrations.add(AddLanguageServerToSDKType())
 
     try app.client.get(URI(string: Environment.get("KEYCLOAK_JWKS_URL") ?? "https://keycloak.pkasila.net/auth/realms/CodeEdit/protocol/openid-connect/certs"))
         .flatMapThrowing { (response: ClientResponse) in

@@ -76,6 +76,7 @@ extension Plugin {
         case swift = "swift"
         case js = "js"
         case jsx = "jsx"
+        case languageServer = "language_server"
     }
 
     struct Ban: Codable {
